@@ -460,6 +460,7 @@ class _MyAppState extends State<MyApp> {
 
                         result3 = result1 - result2; //بول مشتری
                       });
+
                     },
                     child: Text(
                       "حساب",

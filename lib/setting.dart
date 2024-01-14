@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p_calculator2/setting.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 void main(){
   runApp(MaterialApp(home: Setting(
@@ -20,6 +22,7 @@ class _SettingState extends State<Setting> {
   String textf="10 %";
 
   void fisad(value2) {
+
     setState(() {
       selectedValue2 = value2;
 
@@ -78,7 +81,11 @@ class _SettingState extends State<Setting> {
 
 
 
-  void text2(value) {
+  void text2(value) async{
+    final SharedPreferences prefs=await SharedPreferences.getInstance();
+    await prefs.setDouble('1',tec1 as double );
+    await prefs.setDouble('2',tec2 as double );
+
     setState(() {
       selectedValue = value;
     });
