@@ -1,34 +1,25 @@
-
 import 'package:flutter/material.dart';
-import 'aboutPage.dart' as secondPage;
+import 'aboutPage.dart';
 import 'package:p_calculator2/setting.dart';
 import 'package:p_calculator2/taiin maghz.dart';
 
 void main() {
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
-    home: MyApp(),
+    home: Main(),
   ));
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class Main extends StatefulWidget {
+  const Main({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<Main> createState() => _MainState();
 }
 
-class _MyAppState extends State<MyApp> {
-
-  String name1="  نام";
-
-
-//تغیر فیصدی بول
-  num selectedValue2=1;
-  num a=10;
-  String textf="10 %";
-
-
+class _MainState extends State<Main> {
+  String name1 = "      نام ";
+  num a = 10;
 
   Color color = Colors.white;
   bool isTextEditabl = true;
@@ -37,32 +28,58 @@ class _MyAppState extends State<MyApp> {
   int value = 0;
   String text1 = "8 کیلو ";
 
-  // //003 بخش تعیین ۴کیلو یا من یا ۸ کیلو
+  // تعیین مقدار
+  String ttext = "   کیلو";
+  void text2(value) {
+    setState(() {
+      selectedValue = value;
+    });
+    if (selectedValue == 1) {
+      text1 = "4 کیلو";
+      ttext = "4 کیلو";
+    } else if (selectedValue == 2) {
+      text1 = "8 کیلو";
+      ttext = "8 کیلو";
+    } else if (selectedValue == 3) {
+      text1 = "1 من";
+      ttext = "1 من";
+    }
 
-  String ttext="   کیلو";
+    //
+    num n1 = num.parse(nerkh.text);
+    num n2 = num.parse(kilo.text);
 
+    if (selectedValue == 2) {
+      result1 = (n1 / 8) * n2;
+    }
+    if (selectedValue == 1) {
+      result1 = (n1 / 4) * n2;
+    }
+    if (selectedValue == 3) {
+      result1 = n1 * n2;
+    }
+    result2 = result1 / 10; //پول عشر
+    result3 = result1 - result2; //پول مشتری
+  }
 
-  //// 002بخش باک کردن نرخ و کیلو
+  ////  پاک کردن نرخ و کیلو
   void _clearText() {
-    String currentText = tec2.text;
+    String currentText = kilo.text;
     if (currentText.isNotEmpty) {
       String updatedText = currentText.substring(0, currentText.length - 1);
-      tec2.text = updatedText;
+      kilo.text = updatedText;
     }
   }
 
   void clearText() {
-    String currentText = tec1.text;
+    String currentText = nerkh.text;
     if (currentText.isNotEmpty) {
       String updatedText = currentText.substring(0, currentText.length - 1);
-      tec1.text = updatedText;
+      nerkh.text = updatedText;
     }
   }
 
-  ////// 001 بخش باک کردن حروف نام و نام بدر
-  var name = TextEditingController();
-  var fname = TextEditingController();
-
+  /////  پاک کردن حروف نام و نام بدر
   void clearText1() {
     String currentText = name.text;
     if (currentText.isNotEmpty) {
@@ -79,19 +96,18 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  //001///
+  var name = TextEditingController();
+  var fname = TextEditingController();
+  var nerkh = TextEditingController();
+  var kilo = TextEditingController();
   num result4 = 0;
   num result3 = 0;
   num result2 = 0;
   num result1 = 0;
-
   int? selectedValue = 2;
 
-  var tec1 = TextEditingController();
-  var tec2 = TextEditingController();
-
   void dispose() {
-    tec2.dispose();
+    kilo.dispose();
     super.dispose();
   }
 
@@ -103,6 +119,7 @@ class _MyAppState extends State<MyApp> {
         backgroundColor: Colors.blueGrey[800],
         child: ListView(
           children: [
+            //لیست
             ListTile(
               onTap: () {
                 Navigator.pop(context);
@@ -119,10 +136,13 @@ class _MyAppState extends State<MyApp> {
                 "لیست",
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
-            ),        ListTile(
+            ),
+
+            //تعیین مغز
+            ListTile(
               onTap: () {
                 Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (dd){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Maghz();
                 }));
               },
@@ -139,11 +159,13 @@ class _MyAppState extends State<MyApp> {
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
             ),
+
+            //تنظیمات
             ListTile(
               onTap: () {
                 Navigator.pop(context);
 
-                Navigator.push(context, MaterialPageRoute(builder: (cc){
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Setting();
                 }));
               },
@@ -160,12 +182,14 @@ class _MyAppState extends State<MyApp> {
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
             ),
+
+            //AboutPage
             ListTile(
               onTap: () {
                 setState(() {
                   Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (aa) {
-                    return secondPage.MyApp();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return AboutPage();
                   }));
                 });
               },
@@ -182,27 +206,84 @@ class _MyAppState extends State<MyApp> {
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
             ),
+
+            //بیرون شدن از برنامه
+            ListTile(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              leading: IconButton(
+                  onPressed: null,
+                  icon: Icon(
+                    Icons.exit_to_app,
+                    size: 35,
+                    color: Colors.red,
+                  )),
+              title: Text(
+                textDirection: TextDirection.rtl,
+                "بیرون شدن از برنامه",
+                style: TextStyle(fontSize: 22, color: Colors.white),
+              ),
+            ),
           ],
         ),
       ),
+      ///////////////////////////////////////////////////////////
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-            textDirection: TextDirection.rtl,
-            "ماشین حساب P",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 25),),
+          textDirection: TextDirection.rtl,
+          "ماشین حساب P",
+          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+        ),
         actions: [
-          //PubRa
+          //////////////
+          Padding(
+            padding: EdgeInsets.only(right: 2.0, top: 3),
+            child: Text(
+              text1,textDirection: TextDirection.rtl,
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
+
+          PopupMenuButton(
+              onSelected: (Value) {},
+              itemBuilder: (context) => [
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text("4 کیلو",textDirection: TextDirection.rtl,),
+                          value: 1,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text("8 کیلو",textDirection: TextDirection.rtl,),
+                          value: 2,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text(" من",textDirection: TextDirection.rtl,),
+                          value: 3,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                  ]),
+
+          /////////////
 
           Padding(
             padding: EdgeInsets.only(right: 16.0),
             child: Column(
               children: [
-                Text(
-                  textDirection: TextDirection.rtl,
-                  text1, style: TextStyle(fontSize:16,fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 3,),
-                Text(textf,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)
+                // Text(
+                //   textDirection: TextDirection.rtl,
+                //   text1, style: TextStyle(fontSize:16,fontWeight: FontWeight.bold),
+                // ),
+                // SizedBox(height: 3,),
+                // Text(textf,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)
               ],
             ),
           )
@@ -210,17 +291,15 @@ class _MyAppState extends State<MyApp> {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(10.0),
           child: Column(
             children: [
-              Padding(
-                padding: EdgeInsets.only(
-                  right: 17,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    //نرخ کیلوContainer
+                    child: Container(
                       width: 300,
                       color: Colors.blueGrey,
                       child: Column(
@@ -235,12 +314,11 @@ class _MyAppState extends State<MyApp> {
                                   setState(() {
                                     if (isTextEditabl) {
                                       isTextEditabl = true;
-                                      color = Colors.white;
+                                      color = Colors.red;
                                     } else {
                                       isTickMarkVisible = false;
-                                      color = Colors.red;
+                                      color = Colors.white;
                                     }
-
                                     if (isTextEditabl) {
                                       isTickMarkVisible = true;
                                       isTextEditabl = false;
@@ -250,32 +328,37 @@ class _MyAppState extends State<MyApp> {
                                     }
                                   });
                                 },
-                                icon: Container(
-                                    color: Colors.blue,
-                                    child: Icon(Icons.check))),
+                                icon: Expanded(
+                                  child: Container(
+                                      color: Colors.blue,
+                                      child: Icon(Icons.check)),
+                                )),
                           ),
                           Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Card(
-                              color: Colors.white,
-                              child: TextField(
-                                keyboardType: TextInputType.number,
-                                enabled: isTextEditabl,
-                                controller: tec1,
-                                decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      color: Colors.red,
-                                      onPressed: clearText,
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 22,
-                                      )),
-                                  hintText: "   نرخ",
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8)),
+                            child: Expanded(
+                              child: Card(
+                                color: Colors.white,
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  enabled: isTextEditabl,
+                                  controller: nerkh,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                        color: Colors.red,
+                                        onPressed: clearText,
+                                        icon: Icon(
+                                          Icons.close,
+                                          size: 22,
+                                        )),
+                                    hintText: "   نرخ",
+                                    border: OutlineInputBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8)),
+                                  ),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
                                 ),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
                               ),
                             ),
                           ),
@@ -284,8 +367,9 @@ class _MyAppState extends State<MyApp> {
                             child: Card(
                               color: Colors.white,
                               child: TextField(
+
                                 keyboardType: TextInputType.number,
-                                controller: tec2,
+                                controller: kilo,
                                 decoration: InputDecoration(
                                     suffixIcon: IconButton(
                                         color: Colors.red,
@@ -295,8 +379,9 @@ class _MyAppState extends State<MyApp> {
                                           size: 22,
                                         )),
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    hintText: ttext),
+                                        borderRadius:
+                                            BorderRadius.circular(8)),
+                                    hintText: ttext, hintTextDirection: TextDirection.rtl,),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 25),
                               ),
@@ -305,10 +390,13 @@ class _MyAppState extends State<MyApp> {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      width: 44,
-                    ),
-                    Container(
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    //نام/نام پدر Container
+                    child: Container(
                       width: 230,
                       color: Colors.blueGrey,
                       child: Column(
@@ -355,8 +443,9 @@ class _MyAppState extends State<MyApp> {
                                           size: 22,
                                         )),
                                     border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    hintText: "    نام/پدر"),
+                                        borderRadius:
+                                            BorderRadius.circular(8)),
+                                    hintText: " نام پدر"),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 25),
                               ),
@@ -365,109 +454,120 @@ class _MyAppState extends State<MyApp> {
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20,
               ),
-              Container(
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ListTile(
-                    title: Text(
-                      textDirection: TextDirection.rtl,
-                      "  کل پول= $result1 ",
-                      style: TextStyle(color: Colors.white, fontSize: 33),
-                    ),
-                  )),
-              SizedBox(height: 15),
-              Container(
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ListTile(
-                    title: Text(
+              Expanded(
+                  //کل پول
+                child: Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: ListTile(
+                      title: Text(
                         textDirection: TextDirection.rtl,
-                        "  مقدار عشر = $result2",
-                        style: TextStyle(color: Colors.white, fontSize: 33)),
-                  )),
+                        "  کل پول = $result1 ",
+                        style: TextStyle(color: Colors.white, fontSize: 33),
+                      ),
+                    )),
+              ),
+              SizedBox(height: 15),
+              Expanded(
+                child: Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: ListTile(
+                      title: Text(
+                          textDirection: TextDirection.rtl,
+                          "  مقدار عشر = $result2",
+                          style: TextStyle(color: Colors.white, fontSize: 33)),
+                    )),
+              ),
               SizedBox(
                 height: 15,
               ),
-              Container(
-                  height: 80,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ListTile(
-
-                    title: Text(
-                        textDirection: TextDirection.rtl,
-                        "  پول مشتری = $result3",
-                        style: TextStyle(color: Colors.white, fontSize: 33)),
-                  )),
-              SizedBox(
-                height: 33,
+              Expanded(
+                /////پول مشتری
+                child: Container(
+                    height: 80,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: ListTile(
+                      title: Expanded(
+                        child: Text(
+                            textDirection: TextDirection.rtl,
+                            "  پول مشتری = $result3",
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 33)),
+                      ),
+                    )),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MaterialButton(
-                    color: Colors.redAccent,
-                    shape: OutlineInputBorder(),
-                    height: 88,
-                    onPressed: () {
-                      setState(() {
-                        result1 = 0;
-                        result2 = 0;
-                        result3 = 0;
-                        tec2.text = "";
-                        name.text="";
-                        fname.text="";
-                      });
-                    },
-                    child: Text(
-                      "انجام شد",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+              SizedBox(
+                height:10,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MaterialButton(
+                      color: Colors.redAccent,
+                      shape: OutlineInputBorder(),
+                      height: 88,
+                      onPressed: () {
+                        setState(() {
+                          result1 = 0;
+                          result2 = 0;
+                          result3 = 0;
+                          kilo.text = "";
+                          name.text = "";
+                          fname.text = "";
+                        });
+                      },
+                      child: Text(
+                        "ذخیره",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
                     ),
-                  ),
-                  MaterialButton(
-                    color: Colors.blue,
-                    shape: OutlineInputBorder(),
-                    height: 88,
-                    onPressed: () {
-                      setState(() {
-                        num n1 = num.parse(tec1.text);
-                        num n2 = num.parse(tec2.text);
+                    MaterialButton(
+                      color: Colors.blue,
+                      shape: OutlineInputBorder(),
+                      height: 88,
+                      onPressed: () {
+                        setState(() {
+                          num n1 = num.parse(nerkh.text);
+                          num n2 = num.parse(kilo.text);
 
-                        if (selectedValue == 2) {
-                          result1 = (n1 / 8) * n2;
-                        }
+                          if (selectedValue == 2) {
+                            result1 = (n1 / 8) * n2;
+                          }
 
-                        if (selectedValue == 1) {
-                          result1 = (n1 / 4) * n2;
-                        }
+                          if (selectedValue == 1) {
+                            result1 = (n1 / 4) * n2;
+                          }
 
-                        if (selectedValue == 3) {
-                          result1 = n1 * n2;
-                        }
+                          if (selectedValue == 3) {
+                            result1 = n1 * n2;
+                          }
 
-                        result2 = result1 / a; //بول عشر
+                          result2 = result1 / a; //بول عشر
 
-                        result3 = result1 - result2; //بول مشتری
-                      });
-
-                    },
-                    child: Text(
-                      "حساب",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                          result3 = result1 - result2; //بول مشتری
+                        });
+                      },
+                      child: Text(
+                        "انجام",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

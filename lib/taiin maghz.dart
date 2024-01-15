@@ -69,7 +69,7 @@ class _MaghzState extends State<Maghz> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    width: 350,
+                    width:250,
                     color: Colors.blueGrey,
                     child: Column(
                       children: [
@@ -138,7 +138,7 @@ class _MaghzState extends State<Maghz> {
                 height: 20,
               ),
               Container(
-                  height: 80,
+                  height: 130,
                   decoration: BoxDecoration(
                       color: Colors.blueGrey,
                       borderRadius: BorderRadius.circular(5)),
@@ -168,7 +168,7 @@ class _MaghzState extends State<Maghz> {
                       });
                     },
                     child: Text(
-                      "انجام شد",
+                      "پاک",
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
@@ -186,7 +186,7 @@ class _MaghzState extends State<Maghz> {
                     },
 
                     child: Text(
-                      "حساب",
+                      "انجام",
                       style: TextStyle(color: Colors.white, fontSize: 25),
                     ),
                   ),
