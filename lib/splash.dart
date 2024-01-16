@@ -20,7 +20,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 4), () {
       Navigator.push(context, MaterialPageRoute(builder: (bb) {
-        return Main();
+        return InputPage();
       }));
     });
     return Scaffold(

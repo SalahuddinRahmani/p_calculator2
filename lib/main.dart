@@ -1,23 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'aboutPage.dart';
 import 'package:p_calculator2/setting.dart';
 import 'package:p_calculator2/taiin maghz.dart';
+import 'list.dart';
+
+
+
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Main(),
-  ));
+  runApp(MyApp());
 }
 
-class Main extends StatefulWidget {
-  const Main({super.key});
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Data Table App',
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      // ),
+      home: InputPage(),
+    );
+  }
+}
+
+
+class DataModel {
+  String name;
+  String fatherName;
+  int integer;
+
+  DataModel({required this.name, required this.fatherName, required this.integer});
+}
+
+class InputPage extends StatefulWidget {
+  const InputPage({super.key});
 
   @override
-  State<Main> createState() => _MainState();
+  State<InputPage> createState() => _InputPageState();
 }
 
-class _MainState extends State<Main> {
+
+
+class _InputPageState extends State<InputPage> {
+
+
+  ///////////////
+
+/////////////////
+
   String name1 = "      نام ";
   num a = 10;
 
@@ -29,7 +63,7 @@ class _MainState extends State<Main> {
   String text1 = "8 کیلو ";
 
   // تعیین مقدار
-  String ttext = "   کیلو";
+  String ttext = "           کیلو";
   void text2(value) {
     setState(() {
       selectedValue = value;
@@ -81,10 +115,10 @@ class _MainState extends State<Main> {
 
   /////  پاک کردن حروف نام و نام بدر
   void clearText1() {
-    String currentText = name.text;
+    String currentText = names.text;
     if (currentText.isNotEmpty) {
       String updatedText = currentText.substring(0, currentText.length - 1);
-      name.text = updatedText;
+      names.text = updatedText;
     }
   }
 
@@ -96,7 +130,7 @@ class _MainState extends State<Main> {
     }
   }
 
-  var name = TextEditingController();
+  var names = TextEditingController();
   var fname = TextEditingController();
   var nerkh = TextEditingController();
   var kilo = TextEditingController();
@@ -114,15 +148,21 @@ class _MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 53, 53, 0.1),
+      backgroundColor: Colors.black87,
       drawer: Drawer(
         backgroundColor: Colors.blueGrey[800],
         child: ListView(
           children: [
             //لیست
             ListTile(
-              onTap: () {
-                Navigator.pop(context);
+              onTap: () async{
+                SharedPreferences prefs = await SharedPreferences.getInstance();
+                List<String> savedData = prefs.getStringList('data') ?? [];
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TablePage(savedData: savedData)),
+                );
               },
               leading: IconButton(
                   onPressed: null,
@@ -210,7 +250,9 @@ class _MainState extends State<Main> {
             //بیرون شدن از برنامه
             ListTile(
               onTap: () {
-                Navigator.pop(context);
+                setState(() {
+                  Navigator.pop(context);
+                });
               },
               leading: IconButton(
                   onPressed: null,
@@ -230,6 +272,7 @@ class _MainState extends State<Main> {
       ),
       ///////////////////////////////////////////////////////////
       appBar: AppBar(
+        backgroundColor: Colors.white10,
         centerTitle: true,
         title: Text(
           textDirection: TextDirection.rtl,
@@ -249,28 +292,28 @@ class _MainState extends State<Main> {
           PopupMenuButton(
               onSelected: (Value) {},
               itemBuilder: (context) => [
-                    PopupMenuItem(
-                      child: RadioListTile(
-                          title: Text("4 کیلو",textDirection: TextDirection.rtl,),
-                          value: 1,
-                          groupValue: selectedValue,
-                          onChanged: text2),
-                    ),
-                    PopupMenuItem(
-                      child: RadioListTile(
-                          title: Text("8 کیلو",textDirection: TextDirection.rtl,),
-                          value: 2,
-                          groupValue: selectedValue,
-                          onChanged: text2),
-                    ),
-                    PopupMenuItem(
-                      child: RadioListTile(
-                          title: Text(" من",textDirection: TextDirection.rtl,),
-                          value: 3,
-                          groupValue: selectedValue,
-                          onChanged: text2),
-                    ),
-                  ]),
+                PopupMenuItem(
+                  child: RadioListTile(
+                      title: Text("4 کیلو",textDirection: TextDirection.rtl,),
+                      value: 1,
+                      groupValue: selectedValue,
+                      onChanged: text2),
+                ),
+                PopupMenuItem(
+                  child: RadioListTile(
+                      title: Text("8 کیلو",textDirection: TextDirection.rtl,),
+                      value: 2,
+                      groupValue: selectedValue,
+                      onChanged: text2),
+                ),
+                PopupMenuItem(
+                  child: RadioListTile(
+                      title: Text(" من",textDirection: TextDirection.rtl,),
+                      value: 3,
+                      groupValue: selectedValue,
+                      onChanged: text2),
+                ),
+              ]),
 
           /////////////
 
@@ -289,9 +332,10 @@ class _MainState extends State<Main> {
           )
         ],
       ),
-      body: Center(
+      body: Padding(
+        padding: EdgeInsets.all(10.0),
         child: Padding(
-          padding: EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
               Row(
@@ -335,10 +379,10 @@ class _MainState extends State<Main> {
                                 )),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Expanded(
                               child: Card(
-                                color: Colors.white,
+                                color: Colors.white70,
                                 child: TextField(
                                   keyboardType: TextInputType.number,
                                   enabled: isTextEditabl,
@@ -349,12 +393,12 @@ class _MainState extends State<Main> {
                                         onPressed: clearText,
                                         icon: Icon(
                                           Icons.close,
-                                          size: 22,
+                                          size: 20,
                                         )),
                                     hintText: "   نرخ",
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(8)),
+                                        BorderRadius.circular(8)),
                                   ),
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 25),
@@ -363,25 +407,25 @@ class _MainState extends State<Main> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Card(
-                              color: Colors.white,
+                              color: Colors.white70,
                               child: TextField(
 
                                 keyboardType: TextInputType.number,
                                 controller: kilo,
                                 decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        color: Colors.red,
-                                        onPressed: _clearText,
-                                        icon: Icon(
-                                          Icons.close,
-                                          size: 22,
-                                        )),
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(8)),
-                                    hintText: ttext, hintTextDirection: TextDirection.rtl,),
+                                  suffixIcon: IconButton(
+                                      color: Colors.red,
+                                      onPressed: _clearText,
+                                      icon: Icon(
+                                        Icons.close,
+                                        size: 22,
+                                      )),
+                                  border: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.circular(8)),
+                                  hintText: ttext, hintTextDirection: TextDirection.rtl,),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 25),
                               ),
@@ -404,11 +448,11 @@ class _MainState extends State<Main> {
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Card(
-                              color: Colors.white,
+                              color: Colors.white70,
                               child: TextField(
-                                controller: name,
+                                controller: names,
                                 // enabled: isTextEditabl,      اگر فعال باشد با روشن کردن تیک نام هم مانند نرخ قابل تغیر نمیباشد
 
                                 decoration: InputDecoration(
@@ -429,9 +473,9 @@ class _MainState extends State<Main> {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(1.0),
                             child: Card(
-                              color: Colors.white,
+                              color: Colors.white70,
                               child: TextField(
                                 controller: fname,
                                 decoration: InputDecoration(
@@ -444,7 +488,7 @@ class _MainState extends State<Main> {
                                         )),
                                     border: OutlineInputBorder(
                                         borderRadius:
-                                            BorderRadius.circular(8)),
+                                        BorderRadius.circular(8)),
                                     hintText: " نام پدر"),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 25),
@@ -461,7 +505,7 @@ class _MainState extends State<Main> {
                 height: 20,
               ),
               Expanded(
-                  //کل پول
+                //کل پول
                 child: Container(
                     height: 80,
                     decoration: BoxDecoration(
@@ -505,7 +549,7 @@ class _MainState extends State<Main> {
                             textDirection: TextDirection.rtl,
                             "  پول مشتری = $result3",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 33)),
+                            TextStyle(color: Colors.white, fontSize: 33)),
                       ),
                     )),
               ),
@@ -520,13 +564,27 @@ class _MainState extends State<Main> {
                       color: Colors.redAccent,
                       shape: OutlineInputBorder(),
                       height: 88,
-                      onPressed: () {
+                      onPressed: () async{
+                        /////////
+                        final String name =names.text;
+                        final String fatherName = fname.text;
+                        final int integer = int.tryParse(kilo.text) ?? 0;
+
+                        final DataModel newData = DataModel(name: name, fatherName: fatherName, integer: integer);
+
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        List<String> savedData = prefs.getStringList('data') ?? [];
+                        savedData.add('${newData.name},${newData.fatherName},${newData.integer}');
+                        await prefs.setStringList('data', savedData);
+                        /////////
+
                         setState(() {
+
                           result1 = 0;
                           result2 = 0;
                           result3 = 0;
                           kilo.text = "";
-                          name.text = "";
+                          names.text = "";
                           fname.text = "";
                         });
                       },

@@ -50,9 +50,10 @@ class _MaghzState extends State<Maghz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(58, 53, 53, 0.1),
+      backgroundColor: Colors.black87,
 
       appBar: AppBar(
+        backgroundColor: Colors.white10,
 
         centerTitle: true,
         title: Text("تعین نرخ مغز فی من 8 کیلو",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20),),
@@ -77,7 +78,7 @@ class _MaghzState extends State<Maghz> {
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Card(
-                            color: Colors.white,
+                            color: Colors.white70,
                             child: TextField(
                               keyboardType: TextInputType.number,
                               enabled: isTextEditabl,
@@ -104,7 +105,7 @@ class _MaghzState extends State<Maghz> {
                         Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Card(
-                            color: Colors.white,
+                            color: Colors.white70,
                             child: TextField(
                               keyboardType: TextInputType.number,
                               controller: tec2,

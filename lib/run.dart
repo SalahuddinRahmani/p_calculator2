@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:p_calculator2/drop.dart';
 import 'package:p_calculator2/list.dart';
 import 'package:p_calculator2/main.dart';
 import 'package:p_calculator2/setting.dart';
@@ -24,7 +23,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 1), () {
       Navigator.push(context, MaterialPageRoute(builder: (bb) {
-        return List();
+        return InputPage();
       }));
     });
     return
