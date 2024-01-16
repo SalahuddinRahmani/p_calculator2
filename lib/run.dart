@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p_calculator2/list.dart';
 import 'package:p_calculator2/main.dart';
-import 'package:p_calculator2/setting.dart';
 import 'package:p_calculator2/splash.dart';
 
 

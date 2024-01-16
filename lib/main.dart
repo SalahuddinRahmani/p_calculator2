@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'aboutPage.dart';
-import 'package:p_calculator2/setting.dart';
 import 'package:p_calculator2/taiin maghz.dart';
 import 'list.dart';
-
-
-
 
 void main() {
   runApp(MyApp());
@@ -196,29 +191,6 @@ class _InputPageState extends State<InputPage> {
               title: Text(
                 textDirection: TextDirection.rtl,
                 "تایین قیمت مغز",
-                style: TextStyle(fontSize: 22, color: Colors.white),
-              ),
-            ),
-
-            //تنظیمات
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Setting();
-                }));
-              },
-              leading: IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.settings,
-                    size: 30,
-                    color: Colors.white,
-                  )),
-              title: Text(
-                textDirection: TextDirection.rtl,
-                "تنظیمات برنامه",
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
             ),
@@ -594,6 +566,17 @@ class _InputPageState extends State<InputPage> {
                       ),
                     ),
                     MaterialButton(
+                      onLongPress: (){
+                        setState(() {
+
+                          result1 = 0;
+                          result2 = 0;
+                          result3 = 0;
+                          kilo.text = "";
+                          names.text = "";
+                          fname.text = "";
+                        });
+                      },
                       color: Colors.blue,
                       shape: OutlineInputBorder(),
                       height: 88,
