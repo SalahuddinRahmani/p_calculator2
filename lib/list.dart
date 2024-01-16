@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'main.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 
 class TablePage extends StatefulWidget {
   final List<String> savedData;
@@ -77,7 +79,37 @@ class _TablePageState extends State<TablePage> {
                 trailing: IconButton(
                   color: Colors.red,
                   icon: Icon(Icons.delete),
-                  onPressed: () => deleteData(index),
+                    onPressed: () { Alert(
+                      context: context,
+                      type: AlertType.warning,
+                      title: "! حذف شود",
+                      buttons: [
+                        DialogButton(
+                          child: Text(
+                            "نخیر",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.pop(context),
+                          gradient: LinearGradient(colors: [
+                            Color.fromRGBO(62, 14, 14, 0.922),
+                            Color.fromRGBO(190, 9, 9, 0.936),
+                          ]),
+                        ),
+                        DialogButton(
+                          child: Text(
+                            "بلی",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () {deleteData(index);Navigator.pop(context);} ,
+                          gradient: LinearGradient(colors: [
+                            Color.fromRGBO(2, 77, 99, 1.0)  ,
+                            Color.fromRGBO(8, 57, 11, 0.922),
+
+
+                      ]),
+                        )
+                      ],
+                    ).show();}
                 ),
               ),
             );
