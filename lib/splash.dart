@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 
-import 'package:p_calculator2/main.dart';
+// import 'package:p_calculator2/main.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,62 +21,88 @@ class SpalahScreen extends StatefulWidget {
 class _SpalahScreenState extends State<SpalahScreen> {
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 4), () {
-      Navigator.push(context, MaterialPageRoute(builder: (bb) {
-        return InputPage();
-      }));
-    });
+    // Future.delayed(Duration(seconds: 4), () {
+    //   Navigator.push(context, MaterialPageRoute(builder: (bb) {
+    //     return InputPage();
+    //   }));
+    // });
     return Scaffold(
 
-      body: Align(
-        alignment: Alignment.center,
-        child: Stack(
-          fit: StackFit.expand,
+      body: SafeArea(
+        child: Align(
           alignment: Alignment.center,
-          children: [
-            Image.asset("images/sdsdsd (1).jpg",fit:BoxFit.cover
-            ),
+          child: Stack(
+            fit: StackFit.expand,
+            alignment: Alignment.center,
+            children: [
+              Image.asset("images/sdsdsd (1).jpg",fit:BoxFit.cover
+              ),
 
 
 
-            Positioned(
-              top: 200,
-              bottom: 55,
-              child: Shimmer.fromColors(
-                baseColor: Colors.white,
-                highlightColor: Colors.red,
-                child: Text(
-                  ' ❤  خوش آمدید  ❤',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight:
-                    FontWeight.bold,
+              Positioned(
+                top: 200,
+                bottom: 55,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.white,
+                  highlightColor: Colors.red,
+                  child: Text(
+                    ' ❤  خوش آمدید  ❤',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 45.0,
+                    ),
                   ),
                 ),
               ),
-            ),
 
 
 
-            Positioned(
-              bottom: 10,
-              top:200 ,
+              Positioned(
+                bottom: 10,
+                top:200 ,
 
-              child: Container(
+                child: Container(
 
-                  height:300,
-                  width:300,
-                  child: Image.asset(height: 50,width: 50,"images/pistachio_PNG37.png")),
-            ),
-
-            Positioned(
-              left: 44,
-              right: 10,
-              bottom: 15,
-                top: 280,
-                child: Text(' 👍 خرید آسان',style: TextStyle(fontSize: 44,color: Colors.white,fontWeight: FontWeight.bold),)),
-          ],
+                    height:300,
+                    width:300,
+                    child: Image.asset(height: 50,width: 50,"images/pistachio_PNG37.png")),
+              ),
+            // Text(' 👍 خرید آسان',style: TextStyle(fontSize: 44,color: Colors.white,fontWeight: FontWeight.bold),)),
+              Positioned(
+                left: 99,
+                right: 10,
+                bottom: 15,
+                  top: 280,
+                  child: SizedBox(
+                    width: 250.0,
+                    child: DefaultTextStyle(
+                      style: const TextStyle(
+                        fontSize: 35,
+                        color: Colors.white,
+                        shadows: [
+                          Shadow(
+                            blurRadius: 7.0,
+                            color: Colors.white,
+                            offset: Offset(0, 0),
+                          ),
+                        ],
+                      ),
+                      child: AnimatedTextKit(
+                        repeatForever: true,
+                        animatedTexts: [
+                          FlickerAnimatedText('👍 خرید آسان'),
+                          FlickerAnimatedText('👍 خرید آسان'),
+                          FlickerAnimatedText("👍 خرید آسان"),
+                        ],
+                        onTap: () {
+                          print("Tap Event");
+                        },
+                      ),
+                    ),
+                  ),)
+            ],
+          ),
         ),
       ),
     );

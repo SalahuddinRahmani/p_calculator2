@@ -50,7 +50,7 @@ class _InputPageState extends State<InputPage> {
 
 /////////////////
 
-  String name1 = "      نام ";
+  String name1 = " نام ";
   num a = 10;
 
   Color color = Colors.white;
@@ -61,7 +61,8 @@ class _InputPageState extends State<InputPage> {
   String text1 = "8 کیلو ";
 
   // تعیین مقدار
-  String ttext = "           کیلو";
+  String ttext = " کیلو";
+  String Nnerkh = " نرخ";
   void text2(value) {
     setState(() {
       selectedValue = value;
@@ -321,7 +322,7 @@ class _InputPageState extends State<InputPage> {
                         //نرخ کیلوContainer
                         child: Container(
                           width: 300,
-                          color: Colors.blueGrey,
+                          color: Colors.amber[600],
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -371,7 +372,7 @@ class _InputPageState extends State<InputPage> {
                                         //       Icons.close,
                                         //       size: 20,
                                         //     )),
-                                        hintText: "   نرخ",
+                                        hintText: Nnerkh,hintTextDirection: TextDirection.rtl,
                                         border: OutlineInputBorder(
                                             borderRadius:
                                             BorderRadius.circular(8)),
@@ -418,7 +419,7 @@ class _InputPageState extends State<InputPage> {
                         //نام/نام پدر Container
                         child: Container(
                           width: 230,
-                          color: Colors.blueGrey,
+                          color: Colors.amber[600],
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -439,7 +440,7 @@ class _InputPageState extends State<InputPage> {
                                       //       Icons.close,
                                       //       size: 22,
                                       //     )),
-                                      hintText: name1,
+                                      hintText: name1,hintTextDirection: TextDirection.rtl,
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(8)),
                                     ),
@@ -465,7 +466,7 @@ class _InputPageState extends State<InputPage> {
                                         border: OutlineInputBorder(
                                             borderRadius:
                                             BorderRadius.circular(8)),
-                                        hintText: " نام پدر"),
+                                        hintText: " نام پدر",hintTextDirection: TextDirection.rtl,),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
                                   ),
@@ -484,7 +485,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   //کل پول
                   child: Container(
-                      height: 60,
+                      height: 70,
                       decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(5)),
@@ -499,7 +500,7 @@ class _InputPageState extends State<InputPage> {
                 SizedBox(height: 15),
                 Expanded(
                   child: Container(
-                      height: 60,
+                      height: 70,
                       decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(5)),
@@ -516,7 +517,7 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   /////پول مشتری
                   child: Container(
-                      height: 60,
+                      height: 70,
                       decoration: BoxDecoration(
                           color: Colors.blueGrey,
                           borderRadius: BorderRadius.circular(5)),
