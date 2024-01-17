@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aboutPage.dart';
@@ -190,7 +192,7 @@ class _InputPageState extends State<InputPage> {
                   )),
               title: Text(
                 textDirection: TextDirection.rtl,
-                "تایین قیمت مغز",
+                "تعین قیمت مغز",
                 style: TextStyle(fontSize: 22, color: Colors.white),
               ),
             ),
@@ -222,9 +224,7 @@ class _InputPageState extends State<InputPage> {
             //بیرون شدن از برنامه
             ListTile(
               onTap: () {
-                setState(() {
-                  Navigator.pop(context);
-                });
+               exit(0);
               },
               leading: IconButton(
                   onPressed: null,
@@ -308,7 +308,7 @@ class _InputPageState extends State<InputPage> {
         padding: EdgeInsets.all(10.0),
         child: Padding(
           padding: const EdgeInsets.all(5.0),
-          child: Column(
+          child: ListView(
             children: [
               Expanded(
                 flex: 3,
@@ -497,7 +497,7 @@ class _InputPageState extends State<InputPage> {
               SizedBox(height: 15),
               Expanded(
                 child: Container(
-                    height: 80,
+                    height: 60,
                     decoration: BoxDecoration(
                         color: Colors.blueGrey,
                         borderRadius: BorderRadius.circular(5)),
@@ -606,7 +606,7 @@ class _InputPageState extends State<InputPage> {
                         });
                       },
                       child: Text(
-                        "انجام",
+                        "محاسبه",
                         style: TextStyle(color: Colors.white, fontSize: 25),
                       ),
                     ),

@@ -62,7 +62,7 @@ class _MaghzState extends State<Maghz> {
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(10.0),
-          child: Column(
+          child: ListView(
             children: [
 
 
