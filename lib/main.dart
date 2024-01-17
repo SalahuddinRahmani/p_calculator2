@@ -143,9 +143,9 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Color.fromRGBO(7, 57, 65, 1),
       drawer: Drawer(
-        backgroundColor: Colors.blueGrey[800],
+        backgroundColor: Color.fromRGBO(7, 57, 65, 1),
         child: ListView(
           children: [
             //لیست
@@ -208,8 +208,8 @@ class _InputPageState extends State<InputPage> {
               leading: IconButton(
                   onPressed: null,
                   icon: Icon(
-                    Icons.featured_play_list_rounded,
-                    size: 30,
+                    Icons.badge_outlined,
+                    size: 35,
                     color: Colors.white,
                   )),
               title: Text(
@@ -310,150 +310,88 @@ class _InputPageState extends State<InputPage> {
           padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    //نرخ کیلوContainer
-                    child: Container(
-                      width: 300,
-                      color: Colors.blueGrey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: IconButton(
-                                color: color,
-                                onPressed: () {
-                                  setState(() {
-                                    if (isTextEditabl) {
-                                      isTextEditabl = true;
-                                      color = Colors.red;
-                                    } else {
-                                      isTickMarkVisible = false;
-                                      color = Colors.white;
-                                    }
-                                    if (isTextEditabl) {
-                                      isTickMarkVisible = true;
-                                      isTextEditabl = false;
-                                    } else {
-                                      isTickMarkVisible = false;
-                                      isTextEditabl = true;
-                                    }
-                                  });
-                                },
-                                icon: Expanded(
-                                  child: Container(
-                                      color: Colors.blue,
-                                      child: Icon(Icons.check)),
-                                )),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Expanded(
+              Expanded(
+                flex: 3,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      //نرخ کیلوContainer
+                      child: Container(
+                        width: 300,
+                        color: Colors.blueGrey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: IconButton(
+                                  color: color,
+                                  onPressed: () {
+                                    setState(() {
+                                      if (isTextEditabl) {
+                                        isTextEditabl = true;
+                                        color = Colors.red;
+                                      } else {
+                                        isTickMarkVisible = false;
+                                        color = Colors.white;
+                                      }
+                                      if (isTextEditabl) {
+                                        isTickMarkVisible = true;
+                                        isTextEditabl = false;
+                                      } else {
+                                        isTickMarkVisible = false;
+                                        isTextEditabl = true;
+                                      }
+                                    });
+                                  },
+                                  icon: Expanded(
+                                    child: Container(
+                                        color: Colors.blue,
+                                        child: Icon(Icons.check)),
+                                  )),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(1.0),
+                              child: Expanded(
+                                child: Card(
+                                  color: Colors.white70,
+                                  child: TextField(
+                                    keyboardType: TextInputType.number,
+                                    enabled: isTextEditabl,
+                                    controller: nerkh,
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          color: Colors.red,
+                                          onPressed: clearText,
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 20,
+                                          )),
+                                      hintText: "   نرخ",
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
+                                    ),
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 25),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(1.0),
                               child: Card(
                                 color: Colors.white70,
                                 child: TextField(
+
                                   keyboardType: TextInputType.number,
-                                  enabled: isTextEditabl,
-                                  controller: nerkh,
+                                  controller: kilo,
                                   decoration: InputDecoration(
                                     suffixIcon: IconButton(
                                         color: Colors.red,
-                                        onPressed: clearText,
-                                        icon: Icon(
-                                          Icons.close,
-                                          size: 20,
-                                        )),
-                                    hintText: "   نرخ",
-                                    border: OutlineInputBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(8)),
-                                  ),
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Card(
-                              color: Colors.white70,
-                              child: TextField(
-
-                                keyboardType: TextInputType.number,
-                                controller: kilo,
-                                decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      color: Colors.red,
-                                      onPressed: _clearText,
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 22,
-                                      )),
-                                  border: OutlineInputBorder(
-                                      borderRadius:
-                                      BorderRadius.circular(8)),
-                                  hintText: ttext, hintTextDirection: TextDirection.rtl,),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Expanded(
-                    //نام/نام پدر Container
-                    child: Container(
-                      width: 230,
-                      color: Colors.blueGrey,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Card(
-                              color: Colors.white70,
-                              child: TextField(
-                                controller: names,
-                                // enabled: isTextEditabl,      اگر فعال باشد با روشن کردن تیک نام هم مانند نرخ قابل تغیر نمیباشد
-
-                                decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      color: Colors.red,
-                                      onPressed: clearText1,
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 22,
-                                      )),
-                                  hintText: name1,
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                ),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(1.0),
-                            child: Card(
-                              color: Colors.white70,
-                              child: TextField(
-                                controller: fname,
-                                decoration: InputDecoration(
-                                    suffixIcon: IconButton(
-                                        color: Colors.red,
-                                        onPressed: clearText2,
+                                        onPressed: _clearText,
                                         icon: Icon(
                                           Icons.close,
                                           size: 22,
@@ -461,17 +399,82 @@ class _InputPageState extends State<InputPage> {
                                     border: OutlineInputBorder(
                                         borderRadius:
                                         BorderRadius.circular(8)),
-                                    hintText: " نام پدر"),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
+                                    hintText: ttext, hintTextDirection: TextDirection.rtl,),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Expanded(
+                      //نام/نام پدر Container
+                      child: Container(
+                        width: 230,
+                        color: Colors.blueGrey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(1.0),
+                              child: Card(
+                                color: Colors.white70,
+                                child: TextField(
+                                  controller: names,
+                                  // enabled: isTextEditabl,      اگر فعال باشد با روشن کردن تیک نام هم مانند نرخ قابل تغیر نمیباشد
+
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                        color: Colors.red,
+                                        onPressed: clearText1,
+                                        icon: Icon(
+                                          Icons.close,
+                                          size: 22,
+                                        )),
+                                    hintText: name1,
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(1.0),
+                              child: Card(
+                                color: Colors.white70,
+                                child: TextField(
+                                  controller: fname,
+                                  decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          color: Colors.red,
+                                          onPressed: clearText2,
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 22,
+                                          )),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                          BorderRadius.circular(8)),
+                                      hintText: " نام پدر"),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,

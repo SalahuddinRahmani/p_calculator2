@@ -50,7 +50,7 @@ class _MaghzState extends State<Maghz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
+      backgroundColor: Color.fromRGBO(7, 57, 65, 1),
 
       appBar: AppBar(
         backgroundColor: Colors.white10,
@@ -61,137 +61,151 @@ class _MaghzState extends State<Maghz> {
       ),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(20.0),
+          padding: EdgeInsets.all(10.0),
           child: Column(
             children: [
 
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width:250,
-                    color: Colors.blueGrey,
-                    child: Column(
-                      children: [
+              Flexible(
+                flex: 5,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      width:250,
+                      height: 250,
+                      color: Colors.blueGrey,
+                      child: Column(
+                        children: [
 
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Card(
-                            color: Colors.white70,
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              enabled: isTextEditabl,
-                              controller: tec1,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                    color: Colors.red,
-                                    onPressed: clearText,
-                                    icon: Icon(
-                                      Icons.close,
-                                      size: 22,
-                                    )),
-                                hintText:
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Card(
+                              color: Colors.white70,
+                              child: Expanded(
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  enabled: isTextEditabl,
+                                  controller: tec1,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                        color: Colors.red,
+                                        onPressed: clearText,
+                                        icon: Icon(
+                                          Icons.close,
+                                          size: 22,
+                                        )),
+                                    hintText:
 
-                                "نرخ یک من پسته",
-                                border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.circular(8)),
+                                    "نرخ یک من پسته",
+                                    border: OutlineInputBorder(
+                                        borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
+                                ),
                               ),
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 25),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Card(
-                            color: Colors.white70,
-                            child: TextField(
-                              keyboardType: TextInputType.number,
-                              controller: tec2,
-                              decoration: InputDecoration(
-                                  suffixIcon: IconButton(
-                                      color: Colors.red,
-                                      onPressed: _clearText,
-                                      icon: Icon(
-                                        Icons.close,
-                                        size: 22,
-                                      )),
-                                  border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(8)),
-                                  hintText: "مقدار سیر"),
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 25),
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Card(
+                              color: Colors.white70,
+                              child: Expanded(
+                                child: TextField(
+                                  keyboardType: TextInputType.number,
+                                  controller: tec2,
+                                  decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                          color: Colors.red,
+                                          onPressed: _clearText,
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 22,
+                                          )),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(8)),
+                                      hintText: "مقدار سیر"),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 25),
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 44,
-                  ),
+                    SizedBox(
+                      width: 44,
+                    ),
 
-                ],
+                  ],
+                ),
               ),
 
               SizedBox(
                 height: 20,
               ),
-              Container(
-                  height: 130,
-                  decoration: BoxDecoration(
-                      color: Colors.blueGrey,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: ListTile(
-                    title: Text(
-                      textDirection: TextDirection.rtl,
-                      " نرخ یک من مغز 4 کیلو =   $result1 ",
-                      style: TextStyle(color: Colors.white, fontSize: 33),
-                    ),
-                  )),
+              Flexible(
+                flex:3,
+                child: Container(
+                    height: 110,
+                    decoration: BoxDecoration(
+                        color: Colors.blueGrey,
+                        borderRadius: BorderRadius.circular(5)),
+                    child: ListTile(
+                      title: Text(
+                        textDirection: TextDirection.rtl,
+                        " نرخ یک من مغز 4 کیلو =   $result1 ",
+                        style: TextStyle(color: Colors.white, fontSize: 33),
+                      ),
+                    )),
+              ),
 
               SizedBox(
-                height: 33,
+                height: 25,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MaterialButton(
-                    color: Colors.redAccent,
-                    shape: OutlineInputBorder(),
-                    height: 88,
-                    onPressed: () {
-                      setState(() {
-                        result1 = 0;
-                        tec2.text = "";
-                        tec1.text = "";
-                      });
-                    },
-                    child: Text(
-                      "پاک",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+              Flexible(
+                flex: 2,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    MaterialButton(
+                      color: Colors.redAccent,
+                      shape: OutlineInputBorder(),
+                      height: 70,
+                      onPressed: () {
+                        setState(() {
+                          result1 = 0;
+                          tec2.text = "";
+                          tec1.text = "";
+                        });
+                      },
+                      child: Text(
+                        "پاک",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
                     ),
-                  ),
 
-                  MaterialButton(
-                    color: Colors.blue,
-                    shape: OutlineInputBorder(),
-                    height: 88,
-                    onPressed: () {
-                      setState(() {
-                        num n1 = num.parse(tec1.text);
-                        num n2 = num.parse(tec2.text);
-                        result1 = (n1 / n2) *40;
-                      });
-                    },
+                    MaterialButton(
+                      color: Colors.blue,
+                      shape: OutlineInputBorder(),
+                      height: 70,
+                      onPressed: () {
+                        setState(() {
+                          num n1 = num.parse(tec1.text);
+                          num n2 = num.parse(tec2.text);
+                          result1 = (n1 / n2) *40;
+                        });
+                      },
 
-                    child: Text(
-                      "انجام",
-                      style: TextStyle(color: Colors.white, fontSize: 25),
+                      child: Text(
+                        "انجام",
+                        style: TextStyle(color: Colors.white, fontSize: 25),
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
