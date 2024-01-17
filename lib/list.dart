@@ -29,6 +29,7 @@ class _TablePageState extends State<TablePage> {
         name: dataFields[0],
         fatherName: dataFields[1],
         integer: int.tryParse(dataFields[2]) ?? 0,
+        integer2: int.tryParse(dataFields[3]) ?? 0,
       );
       tableData.add(newData);
     }
@@ -75,7 +76,7 @@ class _TablePageState extends State<TablePage> {
                   borderRadius: BorderRadius.circular(10.0)),
               child: ListTile(
                 title: Center(child: Text('${data.name} ولد ${data.fatherName}',style: TextStyle(color: Colors.white,fontSize: 20),)),
-                subtitle: Text(' مقدار :  ${data.integer} کیلو',style: TextStyle(color: Colors.white,fontSize: 20),),
+                subtitle: Text('  نرخ =  ${data.integer2}            مقدار :  ${data.integer} کیلو            ',style: TextStyle(color: Colors.white,fontSize: 20),),
                 trailing: IconButton(
                   color: Colors.red,
                   icon: Icon(Icons.delete),
