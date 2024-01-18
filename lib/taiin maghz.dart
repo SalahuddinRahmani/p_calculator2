@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: Maghz(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     home: Maghz(),
+//   ));
+// }
 
 class Maghz extends StatefulWidget {
   const Maghz({super.key});
@@ -50,13 +50,15 @@ class _MaghzState extends State<Maghz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(7, 57, 65, 1),
+      backgroundColor: Colors.amber[50],
+      // backgroundColor: Color.fromRGBO(7, 57, 65, 1),
 
       appBar: AppBar(
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.amber[900],
+        // backgroundColor: Colors.white10,
 
         centerTitle: true,
-        title: Text("تعین نرخ مغز فی من 8 کیلو",style: TextStyle(fontWeight: FontWeight.w900,fontSize: 20),),
+        title: Text("تعین نرخ مغز فی من 8 کیلو",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.w900,fontSize: 20),),
 
       ),
       body: SafeArea(
@@ -76,7 +78,7 @@ class _MaghzState extends State<Maghz> {
                         // decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
                         width:250,
                         height: 250,
-                        color: Colors.blueGrey,
+                        decoration: BoxDecoration(color: Colors.amber[400]),
                         child: Column(
                           children: [
 
@@ -99,7 +101,7 @@ class _MaghzState extends State<Maghz> {
                                       //     )),
                                       hintText:
 
-                                      "نرخ یک من پسته",
+                                      "نرخ یک من پسته",hintTextDirection: TextDirection.rtl,
                                       border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(8)),
                                     ),
@@ -127,7 +129,7 @@ class _MaghzState extends State<Maghz> {
                                         //     )),
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(8)),
-                                        hintText: "مقدار سیر"),
+                                        hintText: "مقدار سیر",hintTextDirection: TextDirection.rtl,),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
                                   ),
@@ -153,13 +155,13 @@ class _MaghzState extends State<Maghz> {
                   child: Container(
                       height: 110,
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey,
+                          color: Color.fromRGBO(255, 200, 100, 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
                           textDirection: TextDirection.rtl,
                           " نرخ یک من مغز 4 کیلو =   $result1 ",
-                          style: TextStyle(color: Colors.white, fontSize: 33),
+                          style: TextStyle(color: Colors.black87, fontSize: 33),
                         ),
                       )),
                 ),

@@ -6,9 +6,9 @@ import 'aboutPage.dart';
 import 'package:p_calculator2/taiin maghz.dart';
 import 'list.dart';
 
-void main() {
-  runApp(MyApp());
-}
+// void main() {
+//   runApp(MyApp());
+// }
 
 class MyApp extends StatelessWidget {
   @override
@@ -147,98 +147,130 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(7, 57, 65, 1),
+      backgroundColor: Colors.amber[50],
+      // backgroundColor: Color.fromRGBO(7, 57, 65, 1),
       drawer: Drawer(
-        backgroundColor: Color.fromRGBO(7, 57, 65, 1),
+        backgroundColor: Colors.amber[100],
         child: ListView(
           children: [
             //لیست
-            ListTile(
-              onTap: () async{
-                SharedPreferences prefs = await SharedPreferences.getInstance();
-                List<String> savedData = prefs.getStringList('data') ?? [];
+            Container(
+              decoration: BoxDecoration(color:  Color.fromRGBO(255, 200, 100, 1),
+      ),
 
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TablePage(savedData: savedData)),
-                );
-              },
-              leading: IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.import_contacts_outlined,
-                    size: 30,
-                    color: Colors.white,
-                  )),
-              title: Text(
-                textDirection: TextDirection.rtl,
-                "لیست",
-                style: TextStyle(fontSize: 22, color: Colors.white),
+              child: ListTile(
+                onTap: () async{
+                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                  List<String> savedData = prefs.getStringList('data') ?? [];
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TablePage(savedData: savedData)),
+                  );
+                },
+                leading: IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.import_contacts_outlined,
+                      size: 30,
+                      color: Colors.blueAccent,
+                    )),
+                title: Text(
+                  textDirection: TextDirection.rtl,
+                  "لیست",
+                  style: TextStyle(fontSize: 30, color: Colors.black87),
+                ),
               ),
             ),
 
             //تعیین مغز
-            ListTile(
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Maghz();
-                }));
-              },
-              leading: IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.edit,
-                    size: 30,
-                    color: Colors.white,
-                  )),
-              title: Text(
-                textDirection: TextDirection.rtl,
-                "تعین قیمت مغز",
-                style: TextStyle(fontSize: 22, color: Colors.white),
+            Container(
+              decoration: BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
+
+              child: ListTile(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Maghz();
+                  }));
+                },
+                leading: IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.edit,
+                      size: 30,
+                      color: Colors.blueAccent,
+                    )),
+                title: Text(
+                  textDirection: TextDirection.rtl,
+                  "تعین قیمت مغز",
+                  style: TextStyle(fontSize: 25, color:Colors.black87),
+                ),
               ),
             ),
 
             //AboutPage
-            ListTile(
-              onTap: () {
-                setState(() {
-                  Navigator.pop(context);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return AboutPage();
-                  }));
-                });
-              },
-              leading: IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.badge_outlined,
-                    size: 35,
-                    color: Colors.white,
-                  )),
-              title: Text(
-                textDirection: TextDirection.rtl,
-                "About Page",
-                style: TextStyle(fontSize: 22, color: Colors.white),
+            Container(
+              decoration: BoxDecoration(color:Color.fromRGBO(255, 200, 100, 1)),
+              child: ListTile(
+                onTap: () {
+                  setState(() {
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                      return AboutPage();
+                    }));
+                  });
+                },
+                leading: IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.badge_outlined,
+                      size: 35,
+                      color: Colors.blue,
+                    )),
+                title: Text(
+                  textDirection: TextDirection.rtl,
+                  "About Page",
+                  style: TextStyle(fontSize: 22, color: Colors.black87),
+                ),
               ),
             ),
 
             //بیرون شدن از برنامه
-            ListTile(
-              onTap: () {
-               exit(0);
-              },
-              leading: IconButton(
-                  onPressed: null,
-                  icon: Icon(
-                    Icons.exit_to_app,
-                    size: 35,
-                    color: Colors.red,
-                  )),
-              title: Text(
-                textDirection: TextDirection.rtl,
-                "بیرون شدن از برنامه",
-                style: TextStyle(fontSize: 22, color: Colors.white),
+            Container(
+              decoration: BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
+              child: ListTile(
+
+                onTap: () {
+
+                  showDialog(
+                      context: context, builder: (context){
+                    return AlertDialog(
+                      backgroundColor:Color.fromRGBO(254, 220, 110, 1),
+                      title: Text("میخواهید از برنامه بیرون شوید؟",style: TextStyle(color: Colors.black87),),
+                      actions: [
+                        MaterialButton(color: Colors.red,onPressed: (){
+                          Navigator.pop(context);
+                        },child: Text("نخیر",style: TextStyle(color: Colors.white,fontSize: 20),),),
+                        MaterialButton(color: Colors.green[800],onPressed: (){
+                          exit(0);
+                        },child: Text("بلی",style: TextStyle(color: Colors.white,fontSize: 20),),),
+                      ],
+                    );
+                  });
+                },
+                leading: IconButton(
+                    onPressed: null,
+                    icon: Icon(
+                      Icons.exit_to_app,
+                      size: 35,
+                      color: Colors.red,
+                    )),
+                title: Text(
+                  textDirection: TextDirection.rtl,
+                  "بیرون شدن از برنامه",
+                  style: TextStyle(fontSize: 25, color: Colors.black87),
+                ),
               ),
             ),
           ],
@@ -246,12 +278,12 @@ class _InputPageState extends State<InputPage> {
       ),
       ///////////////////////////////////////////////////////////
       appBar: AppBar(
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.amber[900],
         centerTitle: true,
         title: Text(
           textDirection: TextDirection.rtl,
           "ماشین حساب P",
-          style: TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
+          style: TextStyle(color: Colors.white70,fontWeight: FontWeight.w900, fontSize: 20),
         ),
         actions: [
           //////////////
@@ -259,11 +291,12 @@ class _InputPageState extends State<InputPage> {
             padding: EdgeInsets.only(right: 2.0, top: 3),
             child: Text(
               text1,textDirection: TextDirection.rtl,
-              style: TextStyle(fontSize: 25),
+              style: TextStyle(color: Colors.white70,fontSize: 25),
             ),
           ),
 
           PopupMenuButton(
+          color: Colors.amber[100],
               onSelected: (Value) {},
               itemBuilder: (context) => [
                 PopupMenuItem(
@@ -487,13 +520,13 @@ class _InputPageState extends State<InputPage> {
                   child: Container(
                       height: 70,
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey,
+                          color: Color.fromRGBO(255, 200, 100, 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
                           textDirection: TextDirection.rtl,
                           "  کل پول = $result1 ",
-                          style: TextStyle(color: Colors.white, fontSize: 33),
+                          style: TextStyle(color: Colors.black87, fontSize: 33),
                         ),
                       )),
                 ),
@@ -502,13 +535,13 @@ class _InputPageState extends State<InputPage> {
                   child: Container(
                       height: 70,
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey,
+                          color: Color.fromRGBO(255, 200, 100, 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
                             textDirection: TextDirection.rtl,
                             "  مقدار عشر = $result2",
-                            style: TextStyle(color: Colors.white, fontSize: 33)),
+                            style: TextStyle(color: Colors.black87, fontSize: 33)),
                       )),
                 ),
                 SizedBox(
@@ -519,7 +552,7 @@ class _InputPageState extends State<InputPage> {
                   child: Container(
                       height: 70,
                       decoration: BoxDecoration(
-                          color: Colors.blueGrey,
+                          color: Color.fromRGBO(255, 200, 100, 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Expanded(
@@ -527,7 +560,7 @@ class _InputPageState extends State<InputPage> {
                               textDirection: TextDirection.rtl,
                               "  پول مشتری = $result3",
                               style:
-                              TextStyle(color: Colors.white, fontSize: 33)),
+                              TextStyle(color: Colors.black87, fontSize: 33)),
                         ),
                       )),
                 ),

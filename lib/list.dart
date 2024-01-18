@@ -49,11 +49,13 @@ class _TablePageState extends State<TablePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromRGBO(6, 43, 46, 1),
+      backgroundColor: Colors.amber[100],
+      // backgroundColor: Color.fromRGBO(6, 43, 46, 1),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(7, 57, 65, 1),
+        backgroundColor: Colors.amber[900],
+        // backgroundColor: Color.fromRGBO(7, 57, 65, 1),
 
-        title: Text('لیست خرید',style: TextStyle(fontSize: 25),),
+        title: Text('لیست خرید',style: TextStyle(color: Colors.white70,fontSize: 35),),
         centerTitle: true,
       ),
       body: Padding(
@@ -68,15 +70,15 @@ class _TablePageState extends State<TablePage> {
 
                   ],
                   gradient: LinearGradient(colors: [
+                    Colors.amber,
+                    Color.fromRGBO(251, 150, 26, 1.0),
 
-                    Color.fromRGBO(10, 80, 88, 1.0),
-                    Color.fromRGBO(22, 34, 42, 1),
                   ]),
-                  border: Border.all(color: Colors.white70),
+                  border: Border.all(color: Colors.black87),
                   borderRadius: BorderRadius.circular(10.0)),
               child: ListTile(
-                title: Center(child: Text('${data.name} ولد ${data.fatherName}',style: TextStyle(color: Colors.white,fontSize: 20),)),
-                subtitle: Text('  نرخ =  ${data.integer2}            مقدار :  ${data.integer} کیلو            ',style: TextStyle(color: Colors.white,fontSize: 20),),
+                title: Center(child: Text('${data.name} ولد ${data.fatherName}',style: TextStyle(color: Colors.black87,fontSize: 20),)),
+                subtitle: Text('  نرخ =  ${data.integer2}            مقدار :  ${data.integer} کیلو            ',style: TextStyle(color: Colors.black87,fontSize: 20),),
                 trailing: IconButton(
                   color: Colors.red,
                   icon: Icon(Icons.delete),

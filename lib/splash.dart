@@ -3,7 +3,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 
-// import 'package:p_calculator2/main.dart';
+import 'package:p_calculator2/main.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -21,11 +21,11 @@ class SpalahScreen extends StatefulWidget {
 class _SpalahScreenState extends State<SpalahScreen> {
   @override
   Widget build(BuildContext context) {
-    // Future.delayed(Duration(seconds: 4), () {
-    //   Navigator.push(context, MaterialPageRoute(builder: (bb) {
-    //     return InputPage();
-    //   }));
-    // });
+    Future.delayed(Duration(seconds: 4), () {
+      Navigator.push(context, MaterialPageRoute(builder: (bb) {
+        return InputPage();
+      }));
+    });
     return Scaffold(
 
       body: SafeArea(

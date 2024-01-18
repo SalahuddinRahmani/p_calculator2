@@ -10,12 +10,12 @@ enum Gender{
   mColor,
 }
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: AboutPage(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     home: AboutPage(),
+//   ));
+// }
 
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});

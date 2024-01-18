@@ -4,11 +4,11 @@ import 'package:p_calculator2/main.dart';
 import 'package:p_calculator2/splash.dart';
 
 
-void main(){
- runApp(MaterialApp(
-   debugShowCheckedModeBanner: false,
-   home: MyApp(),));
-}
+// void main(){
+//  runApp(MaterialApp(
+//    debugShowCheckedModeBanner: false,
+//    home: MyApp(),));
+// }
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
