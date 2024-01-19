@@ -161,7 +161,7 @@ class _MaghzState extends State<Maghz> {
                         title: Text(
                           textDirection: TextDirection.rtl,
                           " نرخ یک من مغز 4 کیلو =   $result1 ",
-                          style: TextStyle(color: Colors.black87, fontSize: 33),
+                          style: TextStyle(color: Colors.black87, fontSize: 25),
                         ),
                       )),
                 ),

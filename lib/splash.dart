@@ -4,8 +4,15 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 
 
 import 'package:p_calculator2/main.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'mod/person.g.dart';
 
-void main() {
+void main()async{
+
+  await Hive.initFlutter();
+  Hive.registerAdapter(PersonAdapter());
+  await Hive.openBox<Person>(HiveBoxes.personBox);
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
     home: SpalahScreen(),
@@ -21,7 +28,7 @@ class SpalahScreen extends StatefulWidget {
 class _SpalahScreenState extends State<SpalahScreen> {
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: 6), () {
       Navigator.push(context, MaterialPageRoute(builder: (bb) {
         return InputPage();
       }));
@@ -92,8 +99,8 @@ class _SpalahScreenState extends State<SpalahScreen> {
                         repeatForever: true,
                         animatedTexts: [
                           FlickerAnimatedText('👍 خرید آسان'),
-                          FlickerAnimatedText('👍 خرید آسان'),
-                          FlickerAnimatedText("👍 خرید آسان"),
+                          // FlickerAnimatedText('👍 خرید آسان'),
+                          // FlickerAnimatedText("👍 خرید آسان"),
                         ],
                         onTap: () {
                           print("Tap Event");
