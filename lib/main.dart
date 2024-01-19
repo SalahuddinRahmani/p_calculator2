@@ -1,10 +1,12 @@
 import 'dart:io';
-
+import 'mod/person.g.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aboutPage.dart';
 import 'package:p_calculator2/taiin maghz.dart';
 import 'list.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 // void main() {
 //   runApp(MyApp());
@@ -24,16 +26,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-class DataModel {
-  String name;
-  String fatherName;
-  int integer;
-  int integer2;
-
-  DataModel({required this.name, required this.fatherName, required this.integer, required this.integer2});
-}
-
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
 
@@ -41,15 +33,7 @@ class InputPage extends StatefulWidget {
   State<InputPage> createState() => _InputPageState();
 }
 
-
-
 class _InputPageState extends State<InputPage> {
-
-
-  ///////////////
-
-/////////////////
-
   String name1 = " نام ";
   num a = 10;
 
@@ -74,8 +58,8 @@ class _InputPageState extends State<InputPage> {
       text1 = "8 کیلو";
       ttext = "8 کیلو";
     } else if (selectedValue == 3) {
-      text1 = "1 من";
-      ttext = "1 من";
+      text1 = " من";
+      ttext = " من";
     }
 
     //
@@ -94,40 +78,6 @@ class _InputPageState extends State<InputPage> {
     result2 = result1 / 10; //پول عشر
     result3 = result1 - result2; //پول مشتری
   }
-
-  // ////  پاک کردن نرخ و کیلو
-  // void _clearText() {
-  //   String currentText = kilo.text;
-  //   if (currentText.isNotEmpty) {
-  //     String updatedText = currentText.substring(0, currentText.length - 1);
-  //     kilo.text = updatedText;
-  //   }
-  // }
-  //
-  // void clearText() {
-  //   String currentText = nerkh.text;
-  //   if (currentText.isNotEmpty) {
-  //     String updatedText = currentText.substring(0, currentText.length - 1);
-  //     nerkh.text = updatedText;
-  //   }
-  // }
-  //
-  // /////  پاک کردن حروف نام و نام بدر
-  // void clearText1() {
-  //   String currentText = names.text;
-  //   if (currentText.isNotEmpty) {
-  //     String updatedText = currentText.substring(0, currentText.length - 1);
-  //     names.text = updatedText;
-  //   }
-  // }
-  //
-  // void clearText2() {
-  //   String currentText = fname.text;
-  //   if (currentText.isNotEmpty) {
-  //     String updatedText = currentText.substring(0, currentText.length - 1);
-  //     fname.text = updatedText;
-  //   }
-  // }
 
   var names = TextEditingController();
   var fname = TextEditingController();
@@ -155,17 +105,18 @@ class _InputPageState extends State<InputPage> {
           children: [
             //لیست
             Container(
-              decoration: BoxDecoration(color:  Color.fromRGBO(255, 200, 100, 1),
-      ),
-
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(255, 200, 100, 1),
+              ),
               child: ListTile(
-                onTap: () async{
-                  SharedPreferences prefs = await SharedPreferences.getInstance();
+                onTap: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
                   List<String> savedData = prefs.getStringList('data') ?? [];
 
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => TablePage(savedData: savedData)),
+                    MaterialPageRoute(builder: (context) => DisplayPage()),
                   );
                 },
                 leading: IconButton(
@@ -185,8 +136,8 @@ class _InputPageState extends State<InputPage> {
 
             //تعیین مغز
             Container(
-              decoration: BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
-
+              decoration:
+                  BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
               child: ListTile(
                 onTap: () {
                   Navigator.pop(context);
@@ -204,19 +155,21 @@ class _InputPageState extends State<InputPage> {
                 title: Text(
                   textDirection: TextDirection.rtl,
                   "تعین قیمت مغز",
-                  style: TextStyle(fontSize: 25, color:Colors.black87),
+                  style: TextStyle(fontSize: 25, color: Colors.black87),
                 ),
               ),
             ),
 
             //AboutPage
             Container(
-              decoration: BoxDecoration(color:Color.fromRGBO(255, 200, 100, 1)),
+              decoration:
+                  BoxDecoration(color: Color.fromRGBO(255, 200, 100, 1)),
               child: ListTile(
                 onTap: () {
                   setState(() {
                     Navigator.pop(context);
-                    Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
                       return AboutPage();
                     }));
                   });
@@ -238,26 +191,45 @@ class _InputPageState extends State<InputPage> {
 
             //بیرون شدن از برنامه
             Container(
-              decoration: BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
+              decoration:
+                  BoxDecoration(color: Color.fromRGBO(254, 220, 110, 1)),
               child: ListTile(
-
                 onTap: () {
-
                   showDialog(
-                      context: context, builder: (context){
-                    return AlertDialog(
-                      backgroundColor:Color.fromRGBO(254, 220, 110, 1),
-                      title: Text("میخواهید از برنامه بیرون شوید؟",style: TextStyle(color: Colors.black87),),
-                      actions: [
-                        MaterialButton(color: Colors.red,onPressed: (){
-                          Navigator.pop(context);
-                        },child: Text("نخیر",style: TextStyle(color: Colors.white,fontSize: 20),),),
-                        MaterialButton(color: Colors.green[800],onPressed: (){
-                          exit(0);
-                        },child: Text("بلی",style: TextStyle(color: Colors.white,fontSize: 20),),),
-                      ],
-                    );
-                  });
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor: Color.fromRGBO(254, 220, 110, 1),
+                          title: Text(
+                            "میخواهید از برنامه بیرون شوید؟",
+                            style: TextStyle(color: Colors.black87),
+                          ),
+                          actions: [
+                            MaterialButton(
+                              color: Colors.red,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "نخیر",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                            MaterialButton(
+                              color: Colors.green[800],
+                              onPressed: () {
+                                exit(0);
+                              },
+                              child: Text(
+                                "بلی",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 20),
+                              ),
+                            ),
+                          ],
+                        );
+                      });
                 },
                 leading: IconButton(
                     onPressed: null,
@@ -283,58 +255,60 @@ class _InputPageState extends State<InputPage> {
         title: Text(
           textDirection: TextDirection.rtl,
           "ماشین حساب P",
-          style: TextStyle(color: Colors.white70,fontWeight: FontWeight.w900, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white70, fontWeight: FontWeight.w900, fontSize: 20),
         ),
         actions: [
           //////////////
           Padding(
             padding: EdgeInsets.only(right: 2.0, top: 3),
             child: Text(
-              text1,textDirection: TextDirection.rtl,
-              style: TextStyle(color: Colors.white70,fontSize: 25),
+              text1,
+              textDirection: TextDirection.rtl,
+              style: TextStyle(color: Colors.white70, fontSize: 25),
             ),
           ),
 
           PopupMenuButton(
-          color: Colors.amber[100],
+              color: Colors.amber[100],
               onSelected: (Value) {},
               itemBuilder: (context) => [
-                PopupMenuItem(
-                  child: RadioListTile(
-                      title: Text("4 کیلو",textDirection: TextDirection.rtl,),
-                      value: 1,
-                      groupValue: selectedValue,
-                      onChanged: text2),
-                ),
-                PopupMenuItem(
-                  child: RadioListTile(
-                      title: Text("8 کیلو",textDirection: TextDirection.rtl,),
-                      value: 2,
-                      groupValue: selectedValue,
-                      onChanged: text2),
-                ),
-                PopupMenuItem(
-                  child: RadioListTile(
-                      title: Text(" من",textDirection: TextDirection.rtl,),
-                      value: 3,
-                      groupValue: selectedValue,
-                      onChanged: text2),
-                ),
-              ]),
-
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text(
+                            "4 کیلو",
+                            textDirection: TextDirection.rtl,
+                          ),
+                          value: 1,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text(
+                            "8 کیلو",
+                            textDirection: TextDirection.rtl,
+                          ),
+                          value: 2,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                    PopupMenuItem(
+                      child: RadioListTile(
+                          title: Text(
+                            " من",
+                            textDirection: TextDirection.rtl,
+                          ),
+                          value: 3,
+                          groupValue: selectedValue,
+                          onChanged: text2),
+                    ),
+                  ]),
           /////////////
-
           Padding(
             padding: EdgeInsets.only(right: 16.0),
             child: Column(
-              children: [
-                // Text(
-                //   textDirection: TextDirection.rtl,
-                //   text1, style: TextStyle(fontSize:16,fontWeight: FontWeight.bold),
-                // ),
-                // SizedBox(height: 3,),
-                // Text(textf,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15),)
-              ],
+              children: [],
             ),
           )
         ],
@@ -368,7 +342,7 @@ class _InputPageState extends State<InputPage> {
                                       setState(() {
                                         if (isTextEditabl) {
                                           isTextEditabl = true;
-                                          color = Colors.red;
+                                          color = Colors.indigo;
                                         } else {
                                           isTickMarkVisible = false;
                                           color = Colors.white;
@@ -384,7 +358,7 @@ class _InputPageState extends State<InputPage> {
                                     },
                                     icon: Expanded(
                                       child: Container(
-                                          color: Colors.blue,
+                                          color: Colors.amber[900],
                                           child: Icon(Icons.check)),
                                     )),
                               ),
@@ -398,17 +372,11 @@ class _InputPageState extends State<InputPage> {
                                       enabled: isTextEditabl,
                                       controller: nerkh,
                                       decoration: InputDecoration(
-                                        // suffixIcon: IconButton(
-                                        //     color: Colors.red,
-                                        //     onPressed: clearText,
-                                        //     icon: Icon(
-                                        //       Icons.close,
-                                        //       size: 20,
-                                        //     )),
-                                        hintText: Nnerkh,hintTextDirection: TextDirection.rtl,
+                                        hintText: Nnerkh,
+                                        hintTextDirection: TextDirection.rtl,
                                         border: OutlineInputBorder(
                                             borderRadius:
-                                            BorderRadius.circular(8)),
+                                                BorderRadius.circular(8)),
                                       ),
                                       style: TextStyle(
                                           color: Colors.black, fontSize: 25),
@@ -421,21 +389,15 @@ class _InputPageState extends State<InputPage> {
                                 child: Card(
                                   color: Colors.white70,
                                   child: TextField(
-
                                     keyboardType: TextInputType.number,
                                     controller: kilo,
                                     decoration: InputDecoration(
-                                      // suffixIcon: IconButton(
-                                      //     color: Colors.red,
-                                      //     onPressed: _clearText,
-                                      //     icon: Icon(
-                                      //       Icons.close,
-                                      //       size: 22,
-                                      //     )),
                                       border: OutlineInputBorder(
                                           borderRadius:
-                                          BorderRadius.circular(8)),
-                                      hintText: ttext, hintTextDirection: TextDirection.rtl,),
+                                              BorderRadius.circular(8)),
+                                      hintText: ttext,
+                                      hintTextDirection: TextDirection.rtl,
+                                    ),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
                                   ),
@@ -466,16 +428,11 @@ class _InputPageState extends State<InputPage> {
                                     // enabled: isTextEditabl,      اگر فعال باشد با روشن کردن تیک نام هم مانند نرخ قابل تغیر نمیباشد
 
                                     decoration: InputDecoration(
-                                      // suffixIcon: IconButton(
-                                      //     color: Colors.red,
-                                      //     onPressed: clearText1,
-                                      //     icon: Icon(
-                                      //       Icons.close,
-                                      //       size: 22,
-                                      //     )),
-                                      hintText: name1,hintTextDirection: TextDirection.rtl,
+                                      hintText: name1,
+                                      hintTextDirection: TextDirection.rtl,
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     ),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
@@ -489,17 +446,19 @@ class _InputPageState extends State<InputPage> {
                                   child: TextField(
                                     controller: fname,
                                     decoration: InputDecoration(
-                                        // suffixIcon: IconButton(
-                                        //     color: Colors.red,
-                                        //     onPressed: clearText2,
-                                        //     icon: Icon(
-                                        //       Icons.close,
-                                        //       size: 22,
-                                        //     )),
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                            BorderRadius.circular(8)),
-                                        hintText: " نام پدر",hintTextDirection: TextDirection.rtl,),
+                                      // suffixIcon: IconButton(
+                                      //     color: Colors.red,
+                                      //     onPressed: clearText2,
+                                      //     icon: Icon(
+                                      //       Icons.close,
+                                      //       size: 22,
+                                      //     )),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      hintText: " نام پدر",
+                                      hintTextDirection: TextDirection.rtl,
+                                    ),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
                                   ),
@@ -526,7 +485,7 @@ class _InputPageState extends State<InputPage> {
                         title: Text(
                           textDirection: TextDirection.rtl,
                           "  کل پول = $result1 ",
-                          style: TextStyle(color: Colors.black87, fontSize: 33),
+                          style: TextStyle(color: Colors.black87, fontSize: 25),
                         ),
                       )),
                 ),
@@ -541,7 +500,8 @@ class _InputPageState extends State<InputPage> {
                         title: Text(
                             textDirection: TextDirection.rtl,
                             "  مقدار عشر = $result2",
-                            style: TextStyle(color: Colors.black87, fontSize: 33)),
+                            style:
+                                TextStyle(color: Colors.black87, fontSize: 25)),
                       )),
                 ),
                 SizedBox(
@@ -559,13 +519,13 @@ class _InputPageState extends State<InputPage> {
                           child: Text(
                               textDirection: TextDirection.rtl,
                               "  پول مشتری = $result3",
-                              style:
-                              TextStyle(color: Colors.black87, fontSize: 33)),
+                              style: TextStyle(
+                                  color: Colors.black87, fontSize: 25)),
                         ),
                       )),
                 ),
                 SizedBox(
-                  height:10,
+                  height: 10,
                 ),
                 Expanded(
                   child: Row(
@@ -575,23 +535,18 @@ class _InputPageState extends State<InputPage> {
                         color: Colors.green[500],
                         shape: OutlineInputBorder(),
                         height: 70,
-                        onPressed: () async{
+                        onPressed: () {
                           /////////
-                          final String name =names.text;
-                          final String fatherName = fname.text;
-                          final int integer = int.tryParse(kilo.text) ?? 0;
-                          final int integer2 = int.tryParse(nerkh.text) ?? 0;
-
-                          final DataModel newData = DataModel(name: name, fatherName: fatherName, integer: integer, integer2: integer2);
-
-                          SharedPreferences prefs = await SharedPreferences.getInstance();
-                          List<String> savedData = prefs.getStringList('data') ?? [];
-                          savedData.add('${newData.name},${newData.fatherName},${newData.integer},${newData.integer2}');
-                          await prefs.setStringList('data', savedData);
+                          final person = Person(
+                            name: names.text,
+                            fatherName: fname.text,
+                            age: int.tryParse(nerkh.text) ?? 0,
+                            height: int.tryParse(kilo.text) ?? 0,
+                          );
+                          savePerson(person);
                           /////////
 
                           setState(() {
-
                             result1 = 0;
                             result2 = 0;
                             result3 = 0;
@@ -606,9 +561,8 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ),
                       MaterialButton(
-                        onLongPress: (){
+                        onLongPress: () {
                           setState(() {
-
                             result1 = 0;
                             result2 = 0;
                             result3 = 0;
