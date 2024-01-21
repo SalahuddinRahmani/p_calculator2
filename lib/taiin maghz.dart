@@ -1,12 +1,4 @@
-
 import 'package:flutter/material.dart';
-
-// void main() {
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     home: Maghz(),
-//   ));
-// }
 
 class Maghz extends StatefulWidget {
   const Maghz({super.key});
@@ -16,7 +8,6 @@ class Maghz extends StatefulWidget {
 }
 
 class _MaghzState extends State<Maghz> {
-
   Color color = Colors.white;
   bool isTextEditabl = true;
   bool isTickMarkVisible = false;
@@ -58,8 +49,11 @@ class _MaghzState extends State<Maghz> {
         // backgroundColor: Colors.white10,
 
         centerTitle: true,
-        title: Text("تعین نرخ مغز فی من 8 کیلو",style: TextStyle(color: Colors.white70,fontWeight: FontWeight.w900,fontSize: 20),),
-
+        title: Text(
+          "تعین نرخ مغز فی من 8 کیلو",
+          style: TextStyle(
+              color: Colors.white70, fontWeight: FontWeight.w900, fontSize: 20),
+        ),
       ),
       body: SafeArea(
         child: Center(
@@ -67,8 +61,6 @@ class _MaghzState extends State<Maghz> {
             padding: EdgeInsets.all(10.0),
             child: ListView(
               children: [
-
-
                 Flexible(
                   flex: 5,
                   child: Row(
@@ -76,34 +68,27 @@ class _MaghzState extends State<Maghz> {
                     children: [
                       Container(
                         // decoration: BoxDecoration(borderRadius: BorderRadius.circular(15)),
-                        width:250,
+                        width: 250,
                         height: 250,
                         decoration: BoxDecoration(color: Colors.amber[400]),
                         child: Column(
                           children: [
-
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Card(
                                 color: Colors.white70,
                                 child: Expanded(
                                   child: TextField(
+                                    textDirection: TextDirection.rtl,
                                     keyboardType: TextInputType.number,
                                     enabled: isTextEditabl,
                                     controller: tec1,
                                     decoration: InputDecoration(
-                                      // suffixIcon: IconButton(
-                                      //     color: Colors.red,
-                                      //     onPressed: clearText,
-                                      //     icon: Icon(
-                                      //       Icons.close,
-                                      //       size: 22,
-                                      //     )),
-                                      hintText:
-
-                                      "نرخ یک من پسته",hintTextDirection: TextDirection.rtl,
+                                      hintText: "نرخ یک من پسته",
+                                      hintTextDirection: TextDirection.rtl,
                                       border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(8)),
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
                                     ),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
@@ -117,19 +102,16 @@ class _MaghzState extends State<Maghz> {
                                 color: Colors.white70,
                                 child: Expanded(
                                   child: TextField(
+                                    textDirection: TextDirection.rtl,
                                     keyboardType: TextInputType.number,
                                     controller: tec2,
                                     decoration: InputDecoration(
-                                        // suffixIcon: IconButton(
-                                        //     color: Colors.red,
-                                        //     onPressed: _clearText,
-                                        //     icon: Icon(
-                                        //       Icons.close,
-                                        //       size: 22,
-                                        //     )),
-                                        border: OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(8)),
-                                        hintText: "مقدار سیر",hintTextDirection: TextDirection.rtl,),
+                                      border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8)),
+                                      hintText: "مقدار سیر",
+                                      hintTextDirection: TextDirection.rtl,
+                                    ),
                                     style: TextStyle(
                                         color: Colors.black, fontSize: 25),
                                   ),
@@ -142,30 +124,27 @@ class _MaghzState extends State<Maghz> {
                       SizedBox(
                         width: 44,
                       ),
-
                     ],
                   ),
                 ),
-
                 SizedBox(
                   height: 20,
                 ),
                 Flexible(
-                  flex:3,
+                  flex: 3,
                   child: Container(
-                      height: 110,
+                      height: 120,
                       decoration: BoxDecoration(
                           color: Color.fromRGBO(255, 200, 100, 1),
                           borderRadius: BorderRadius.circular(5)),
                       child: ListTile(
                         title: Text(
                           textDirection: TextDirection.rtl,
-                          " نرخ یک من مغز 4 کیلو =   $result1 ",
+                          " نرخ یک من مغز 4 کیلو =   ${result1.toStringAsFixed(1)} ",
                           style: TextStyle(color: Colors.black87, fontSize: 25),
                         ),
                       )),
                 ),
-
                 SizedBox(
                   height: 25,
                 ),
@@ -190,7 +169,6 @@ class _MaghzState extends State<Maghz> {
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         ),
                       ),
-
                       MaterialButton(
                         color: Colors.blue,
                         shape: OutlineInputBorder(),
@@ -199,10 +177,9 @@ class _MaghzState extends State<Maghz> {
                           setState(() {
                             num n1 = num.parse(tec1.text);
                             num n2 = num.parse(tec2.text);
-                            result1 = (n1 / n2) *40;
+                            result1 = (n1 / n2) * 40;
                           });
                         },
-
                         child: Text(
                           "انجام",
                           style: TextStyle(color: Colors.white, fontSize: 25),

@@ -10,13 +10,6 @@ enum Gender{
   mColor,
 }
 
-// void main() {
-//   runApp(MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     home: AboutPage(),
-//   ));
-// }
-
 class AboutPage extends StatefulWidget {
   const AboutPage({super.key});
 
@@ -95,8 +88,6 @@ class _AboutPageState extends State<AboutPage> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-
-
                   Container(
                     decoration: BoxDecoration(
                         gradient: LinearGradient(colors: [
@@ -257,9 +248,6 @@ class _AboutPageState extends State<AboutPage> {
                   SizedBox(
                     height: 4,
                   ),
-
-
-
                 ],
               ),
             ),
@@ -267,7 +255,6 @@ class _AboutPageState extends State<AboutPage> {
         ),
       ),
     );
-
   }
 // Future<void> _launchUrl() async {
 //   if (!await launchUrl(_url)) {

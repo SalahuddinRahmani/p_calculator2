@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-
-
 import 'package:p_calculator2/main.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 import 'mod/person.g.dart';
 
 void main()async{
-
   await Hive.initFlutter();
   Hive.registerAdapter(PersonAdapter());
   await Hive.openBox<Person>(HiveBoxes.personBox);
@@ -34,7 +31,6 @@ class _SpalahScreenState extends State<SpalahScreen> {
       }));
     });
     return Scaffold(
-
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
@@ -44,12 +40,10 @@ class _SpalahScreenState extends State<SpalahScreen> {
             children: [
               Image.asset("images/sdsdsd (1).jpg",fit:BoxFit.cover
               ),
-
-
-
               Positioned(
                 top: 200,
                 bottom: 55,
+                //// Shimer
                 child: Shimmer.fromColors(
                   baseColor: Colors.white,
                   highlightColor: Colors.red,
@@ -62,15 +56,10 @@ class _SpalahScreenState extends State<SpalahScreen> {
                   ),
                 ),
               ),
-
-
-
               Positioned(
                 bottom: 10,
                 top:200 ,
-
                 child: Container(
-
                     height:300,
                     width:300,
                     child: Image.asset(height: 50,width: 50,"images/pistachio_PNG37.png")),
