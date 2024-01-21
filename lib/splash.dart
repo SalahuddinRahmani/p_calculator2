@@ -4,7 +4,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:p_calculator2/main.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
-import 'mod/person.g.dart';
+import 'person.g.dart';
 
 void main()async{
   await Hive.initFlutter();
@@ -26,6 +26,7 @@ class _SpalahScreenState extends State<SpalahScreen> {
   @override
   Widget build(BuildContext context) {
     Future.delayed(Duration(seconds: 6), () {
+
       Navigator.push(context, MaterialPageRoute(builder: (bb) {
         return InputPage();
       }));

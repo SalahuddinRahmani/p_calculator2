@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'mod/person.g.dart';
+import 'person.g.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -102,13 +102,13 @@ class _DisplayPageState extends State<DisplayPage> {
           return Container(
             decoration: BoxDecoration(
                 boxShadow: <BoxShadow>[],
-                // gradient: LinearGradient(colors: [
-                //   Color.fromRGBO(255, 200, 100, 1),
-                //   Color.fromRGBO(235, 160, 26, 1.0),
-                //
-                //
-                // ]),
-                color: Colors.amber[50],
+                gradient: LinearGradient(colors: [
+                  Color.fromRGBO(255, 200, 100, 1),
+                  Color.fromRGBO(235, 160, 26, 1.0),
+
+
+                ]),
+                // color: Colors.amber[50],
                 border: Border.all(color: Colors.black87),
                 borderRadius: BorderRadius.circular(10.0)),
             child: ListTile(

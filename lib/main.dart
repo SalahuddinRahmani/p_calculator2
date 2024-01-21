@@ -1,12 +1,10 @@
 import 'dart:io';
-import 'mod/person.g.dart';
+import 'person.g.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'aboutPage.dart';
 import 'package:p_calculator2/taiin maghz.dart';
 import 'list.dart';
-import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 class MyApp extends StatelessWidget {
   @override
@@ -161,8 +159,8 @@ class _InputPageState extends State<InputPage> {
                     )),
                 title: Text(
                   textDirection: TextDirection.rtl,
-                  "About Page",
-                  style: TextStyle(fontSize: 22, color: Colors.black87),
+                  "سازنده برنامه",
+                  style: TextStyle(fontSize:25, color: Colors.black87),
                 ),
               ),
             ),
@@ -297,7 +295,7 @@ class _InputPageState extends State<InputPage> {
                                       enabled: isTextEditabl,
                                       controller: nerkh,
                                       decoration: InputDecoration(
-                                        hintText: Nnerkh,
+                                        labelText: Nnerkh,
                                         hintTextDirection: TextDirection.rtl,
                                         border: OutlineInputBorder(
                                             borderRadius:
@@ -314,6 +312,7 @@ class _InputPageState extends State<InputPage> {
                                 child: Card(
                                   color: Colors.white70,
                                   child: TextField(
+
                                    textDirection: TextDirection.rtl,
                                     keyboardType: TextInputType.number,
                                     controller: kilo,
@@ -321,7 +320,7 @@ class _InputPageState extends State<InputPage> {
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8)),
-                                      hintText: ttext,
+                                      labelText: ttext,
                                       hintTextDirection: TextDirection.rtl,
                                     ),
                                     style: TextStyle(
@@ -339,7 +338,7 @@ class _InputPageState extends State<InputPage> {
                       Expanded(
                         //نام/نام پدر Container
                         child: Container(
-                          width: 230,
+                          width: 300,
                           color: Colors.amber[600],
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
@@ -354,7 +353,7 @@ class _InputPageState extends State<InputPage> {
                                     // enabled: isTextEditabl,      اگر فعال باشد با روشن کردن تیک نام هم مانند نرخ قابل تغیر نمیباشد
 
                                     decoration: InputDecoration(
-                                      hintText: name1,
+                                      labelText: name1,
                                       hintTextDirection: TextDirection.rtl,
                                       border: OutlineInputBorder(
                                           borderRadius:
@@ -376,7 +375,7 @@ class _InputPageState extends State<InputPage> {
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(8)),
-                                      hintText: " نام پدر",
+                                      labelText: " نام پدر",
                                       hintTextDirection: TextDirection.rtl,
                                     ),
                                     style: TextStyle(
@@ -504,14 +503,14 @@ class _InputPageState extends State<InputPage> {
                           });
                         },
                         child: CircleAvatar(
-                          backgroundColor: Colors.green[800],
+                          backgroundColor: Colors.amber[800],
                           radius: 45,
                           child: CircleAvatar(
-                            backgroundColor: Colors.green[500],
+                            backgroundColor: Colors.amber[600],
                             radius: 40,
                             child: Text(
                               "ذخیره",
-                              style: TextStyle(color: Colors.white, fontSize: 25),
+                              style: TextStyle(color: Colors.black, fontSize: 25),
                             ),
                           ),
                         ),
@@ -597,13 +596,14 @@ class _InputPageState extends State<InputPage> {
                           });
                         },
                         child: CircleAvatar(
+                          backgroundColor: Colors.amber[800],
                           radius: 45,
                           child: CircleAvatar(
-                            backgroundColor: Colors.lightBlue,
+                            backgroundColor: Colors.amber[600],
                             radius: 40,
                             child: Text(
                             "محاسبه",
-                            style: TextStyle(color: Colors.white, fontSize: 25),
+                            style: TextStyle(color: Colors.black, fontSize: 25),
                           ),),
                         ),
                       )
